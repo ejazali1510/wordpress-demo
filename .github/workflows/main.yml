@@ -1,0 +1,29 @@
+name: Deploy PHP/WordPress Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
+          # Commands to deploy your PHP/WordPress application
+          # For example:
+          cd /var/www/html/wordpress
+          git pull origin main
+          # Any other deployment commands (e.g., database updates, cache clearing)
+          ENDSSH
