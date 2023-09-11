@@ -23,7 +23,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
           # Commands to deploy your PHP/WordPress application
           # For example:
-          cd /var/www/html/wordpress
+          cd /var/www/html/wordpress-demo
           git pull origin main
           # Any other deployment commands (e.g., database updates, cache clearing)
           ENDSSH
